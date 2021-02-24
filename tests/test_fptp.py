@@ -2,7 +2,7 @@
 
 import pytest
 
-from votelib.fptp import fptp
+from votelib import fptp
 
 class TestFPTP():
     def test_fptp(self):
