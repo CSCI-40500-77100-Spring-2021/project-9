@@ -21,9 +21,9 @@ def fptp(ballots: str):
     for line in reader:
         index = line.index('x')
         candidate = candidates[index]
-        results[candidate] += 1
+        tallies[candidate] += 1
 
     # grab the key with the highest value
-    winner = max(results, key=results.get)
+    winner = max(tallies, key=tallies.get)
 
     return {'winner': winner, 'tallies': tallies}
