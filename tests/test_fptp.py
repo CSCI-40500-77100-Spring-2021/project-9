@@ -6,7 +6,7 @@ from votelib import fptp
 
 class TestFPTP():
     def test_fptp(self):
-        with open("project-9/tests/data/fptp.csv") as f:
+        with open("tests/data/fptp.csv") as f:
             ballots = f.read()
 
         results = fptp(ballots)
