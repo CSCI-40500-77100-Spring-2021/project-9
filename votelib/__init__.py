@@ -3,6 +3,7 @@
 import csv
 from io import StringIO
 
+
 def fptp(ballots: str):
     # create a csv reader from the string argument
     f = StringIO(ballots)
@@ -23,7 +24,23 @@ def fptp(ballots: str):
         candidate = candidates[index]
         tallies[candidate] += 1
 
-    # grab the key with the highest value
-    winner = max(tallies, key=tallies.get)
+    # check if there are multiple winners
 
-    return {'winner': winner, 'tallies': tallies}
+    # max_value
+    max_value = tallies.get(max(tallies))
+    winners = []
+    for names in tallies:
+        if tallies.get(names) == max_value:
+            winners.append(names)
+
+    if len(winners) > 1:
+
+        # multiple winners user can choose another voting system
+        print("multiple winners")
+        return winners
+
+    else:
+        # only one winner
+        # grab the key with the highest value
+        winner = max(tallies, key=tallies.get)
+        return {'winner': winner, 'tallies': tallies}
