@@ -20,3 +20,6 @@ source code available for security researchers
 Votelib is a fast and free library whose primary customers are organizations
 and municipalities administering elections. Our library is open source, so it
 is free to be analyzed by security researchers and the general public.
+
+# Layered software architecture
+
