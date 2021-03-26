@@ -21,7 +21,7 @@ Votelib is a fast and free library whose primary customers are organizations
 and municipalities administering elections. Our library is open source, so it
 is free to be analyzed by security researchers and the general public.
 
-# Layered software architecture
+# Layered software architecture (can be updated overtime) 
 
 ## Nonfunctional Product Characteristics
 - voting results must be accurate, any incorrect result reporting can affect the product
@@ -36,7 +36,10 @@ is free to be analyzed by security researchers and the general public.
 ## Software Compatibility
 - Instead of using VoteLib on its own, one may import VoteLib as a component of another larger application to access some or all of the services provided by VoteLib
 
+## Layers
 User Interface -> User Interface Management -> Application Services
+
+![2](https://user-images.githubusercontent.com/77586278/112678535-6bf26c00-8e41-11eb-9a8f-0f94eca8ea41.PNG)
 
 ## Architecture diagram
 ![Capture](https://user-images.githubusercontent.com/77586278/112677611-5af52b00-8e40-11eb-9df8-b79baf8c2314.PNG)
