@@ -23,17 +23,17 @@ is free to be analyzed by security researchers and the general public.
 
 # Layered software architecture (can be updated overtime) 
 
-## Nonfunctional Product Characteristics
+### Nonfunctional Product Characteristics
 - voting results must be accurate, any incorrect result reporting can affect the product
 - One may use VoteLib to count a large number of ballots, so performance is important for our software to succeed
-## Product Lifetime
+### Product Lifetime
 - we can evolve our architecture as we can update our products to include differnt voting systems based on clients request
-## Software Reuse
+### Software Reuse
 - our product can be resused because voting systems is a popular choice when finding best candidates
 - we can reuse old files and compare old results with new results 
-## Number of users
+### Number of users
 - our software needs to be responsive and reliable even with large datasets
-## Software Compatibility
+### Software Compatibility
 - Instead of using VoteLib on its own, one may import VoteLib as a component of another larger application to access some or all of the services provided by VoteLib
 
 ## Layers
