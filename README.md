@@ -1,5 +1,8 @@
 # votelib
 
+## Docker
+1. `docker run --rm registry.digitalocean.com/cs405/votelib:latest`
+
 ## Run the prototype
 1. Install Python 3.9+
 2. Install pytest: `pip install pytest`

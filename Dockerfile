@@ -1,10 +1,11 @@
-FROM python:3
+FROM python:3.9.1
 
-WORKDIR /usr/src/app
-
+WORKDIR /vl
 COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+COPY tests ./tests
+COPY votelib ./votelib
 
-COPY . .
+RUN pip install --upgrade pip && \
+        pip install --no-cache-dir -r requirements.txt
 
-CMD [ "python", "./your-daemon-or-script.py" ]
+CMD ["pytest"]
