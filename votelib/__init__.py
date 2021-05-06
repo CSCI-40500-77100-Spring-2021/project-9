@@ -30,4 +30,7 @@ def fptp(ballots: str):
     # get winners and ties
     winners = {key for key, val in tallies.items() if val == max_value}
 
+    # report metrics data
+    record_usage()
+
     return {'winners': winners, 'tallies': tallies}
