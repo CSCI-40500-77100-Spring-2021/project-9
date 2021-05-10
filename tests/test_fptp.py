@@ -4,6 +4,7 @@ import pytest
 
 from votelib import fptp
 
+
 class TestFPTP():
     def test_fptp(self):
         with open("tests/data/fptp.csv") as f:
