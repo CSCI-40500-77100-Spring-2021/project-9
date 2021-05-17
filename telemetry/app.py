@@ -1,14 +1,22 @@
 from datetime import datetime
+from functools import wraps
 import json
 import os
 
 from flask import abort, Flask, request
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import and_
 from sqlalchemy.ext.declarative import DeclarativeMeta
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DB_URI']
 db = SQLAlchemy(app)
+
+class APIKey(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    key = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    expires_at = db.Column(db.DateTime, nullable=False)
 
 class Usage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -32,6 +40,28 @@ class Usage(db.Model):
                     fields[field] = str(attr)
             return fields
 
+# decorator function to check api key
+def authenticated(func):
+    @wraps(func)
+    def decorated(*args, **kwargs):
+        key = request.args.get('key')
+        if not key:
+            key = request.headers.get('key')
+        if not key:
+            abort(401)
+
+        q = APIKey.query.filter(
+            and_(
+                APIKey.expires_at >= datetime.utcnow(),
+                APIKey.key == key
+            )
+        ).exists()
+        found = db.session.query(q).scalar()
+        if not found:
+            abort(401)
+        return func(*args, **kwargs)
+
+    return decorated
 
 # The endpoint to record metrics.
 # Method: POST
@@ -55,17 +85,25 @@ def record():
     return "OK"
 
 @app.route("/drop", methods=['GET'])
+@authenticated
 def drop():
+    try:
+        key = request.form['key']
+    except KeyError:
+        abort(400)
+
     num = Usage.query.delete()
     db.session.commit()
     return str(num)
 
 @app.route("/data", methods=['GET'])
+@authenticated
 def data():
     usages = Usage.query.all()
     return json.dumps(usages, cls=Usage.UsageEncoder)
 
 @app.route("/data/human", methods=['GET'])
+@authenticated
 def data_human():
     usages = Usage.query.all()
     return "\n".join([str(x) for x in usages])
