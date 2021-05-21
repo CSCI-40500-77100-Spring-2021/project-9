@@ -1,5 +1,7 @@
 # votelib
 
+[![votelib](https://github.com/CSCI-40500-77100-Spring-2021/project-9/actions/workflows/votelib.yml/badge.svg)](https://github.com/CSCI-40500-77100-Spring-2021/project-9/actions/workflows/votelib.yml)
+
 ## Docker
 1. `docker run --rm registry.digitalocean.com/cs405/votelib:latest`
 

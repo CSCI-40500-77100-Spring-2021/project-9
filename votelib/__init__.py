@@ -2,9 +2,14 @@
 
 import csv
 from io import StringIO
+from datetime import datetime, timedelta
+
+from .telemetry import record_usage
 
 
 def fptp(ballots: str):
+    start = datetime.now()
+
     # create a csv reader from the string argument
     f = StringIO(ballots)
     reader = csv.reader(f, delimiter=',')
@@ -30,7 +35,11 @@ def fptp(ballots: str):
     # get winners and ties
     winners = {key for key, val in tallies.items() if val == max_value}
 
+    end = datetime.now()
+    duration = end - start
+    duration_ms = duration / timedelta(milliseconds=1)
+
     # report metrics data
-    record_usage()
+    record_usage('fptp', sum(tallies.values()), duration_ms)
 
     return {'winners': winners, 'tallies': tallies}
