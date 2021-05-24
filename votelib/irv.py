@@ -3,7 +3,7 @@ import csv
 
 def irv():
     # create a list from csv
-    with open(r"C:\Users\andrew\Desktop\405\project-9\tests\data\irv.csv", newline='') as f:
+    with open("tests\data\irv.csv", newline='') as f:
         reader = csv.reader(f)
         data = list(reader)
 
